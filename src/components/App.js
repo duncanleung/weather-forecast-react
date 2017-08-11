@@ -6,8 +6,10 @@ import Header from "./Header/Header";
 import pattern from "../images/pattern.svg";
 
 const Background = styled.div`
-  background: url('${pattern}');
+  // background: url('${pattern}');
   height: 100vh;
+  max-width: 800px;
+  margin: 0 auto;
 `;
 
 class App extends Component {

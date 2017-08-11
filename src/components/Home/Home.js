@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <HomeWrapper>
       <H1>Enter a City and State</H1>
-      <LocationContainer />
+      <LocationContainer column />
     </HomeWrapper>
   );
 };

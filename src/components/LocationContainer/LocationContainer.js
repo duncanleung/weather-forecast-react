@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 const Layout = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => (props.column ? "column" : "row")};
+  align-items: center;
 `;
 
 const Input = styled.input`
@@ -17,7 +18,7 @@ const Button = styled.button`
   margin: 10px;
   background-color: #5cb85c;
   border: none;
-  padding: 8px 0px;
+  padding: 8px 10px;
   border-radius: 6px;
   box-sizing: border-box;
   color: white;
@@ -47,14 +48,14 @@ class LocationContainer extends Component {
 
   render() {
     return (
-      <Layout>
+      <Layout column={this.props.column}>
         <Input
           type="text"
           value={this.state.location}
           placeholder="ex: Irvine, CA"
           onChange={this.handleChange}
         />
-        <Button>Get Weather Forecast</Button>
+        <Button>Get Forecast</Button>
       </Layout>
     );
   }
