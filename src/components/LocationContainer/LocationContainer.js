@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
+
+import apiMethods from "../../utilities/api";
 
 const Layout = styled.div`
   display: flex;
@@ -30,10 +33,12 @@ class LocationContainer extends Component {
     super(props);
 
     this.state = {
-      location: ""
+      location: "",
+      response: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -46,19 +51,38 @@ class LocationContainer extends Component {
     });
   }
 
+  handleSubmit() {
+    apiMethods.fetchForecast(this.state.location).then(response => {
+      this.setState((prevState, props) => {
+        return {
+          response: response.data
+        };
+      });
+    });
+  }
+
   render() {
     return (
       <Layout column={this.props.column}>
+        <pre>
+          <code>
+            {JSON.stringify(this.state.response, null, 2)}
+          </code>
+        </pre>
         <Input
           type="text"
           value={this.state.location}
           placeholder="ex: Irvine, CA"
           onChange={this.handleChange}
         />
-        <Button>Get Forecast</Button>
+        <Button onClick={this.handleSubmit}>Get Forecast</Button>
       </Layout>
     );
   }
 }
+
+LocationContainer.propTypes = {
+  column: PropTypes.bool
+};
 
 export default LocationContainer;
