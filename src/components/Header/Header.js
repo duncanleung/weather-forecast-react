@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import LocationContainer from "../LocationContainer/LocationContainer";
 
@@ -10,13 +11,16 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Title = styled.div`padding: 0 10px;`;
+const Title = styled(Link)`
+  padding: 0 10px;
+  text-decoration: none;
+  color: orangered;`;
 
 const Header = () => {
   return (
     <Wrapper>
-      <Title>Weather Forecast</Title>
-      ${/*<LocationContainer />*/}
+      <Title to="/">Weather Forecast</Title>
+      {/*<LocationContainer />*/}
     </Wrapper>
   );
 };
