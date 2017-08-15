@@ -33,12 +33,24 @@ class LocationContainer extends Component {
     super(props);
 
     this.state = {
-      location: "",
-      response: ""
+      location: "irvine",
+      response: null
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.state.location) {
+      apiMethods.fetchCurrentWeather(this.state.location).then(response => {
+        this.setState((prevState, props) => {
+          return {
+            response: response
+          };
+        });
+      });
+    }
   }
 
   handleChange(e) {
@@ -54,10 +66,10 @@ class LocationContainer extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    apiMethods.fetchForecast(this.state.location).then(response => {
+    apiMethods.fetchCurrentWeather(this.state.location).then(response => {
       this.setState((prevState, props) => {
         return {
-          response: response.data
+          response: response
         };
       });
     });
@@ -66,11 +78,6 @@ class LocationContainer extends Component {
   render() {
     return (
       <Layout column={this.props.column}>
-        <pre>
-          <code>
-            {JSON.stringify(this.state.response, null, 2)}
-          </code>
-        </pre>
         <form onSubmit={this.handleSubmit}>
           <Input
             type="text"
@@ -80,6 +87,13 @@ class LocationContainer extends Component {
           />
           <Button>Get Forecast</Button>
         </form>
+        {this.state.response
+          ? <pre>
+              <code>
+                {JSON.stringify(this.state.response, null, 2)}
+              </code>
+            </pre>
+          : "Loading"}
       </Layout>
     );
   }

@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <Wrapper>
       <Title>Weather Forecast</Title>
-      <LocationContainer />
+      ${/*<LocationContainer />*/}
     </Wrapper>
   );
 };
