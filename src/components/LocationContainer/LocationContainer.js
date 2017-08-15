@@ -75,7 +75,7 @@ class LocationContainer extends Component {
       });
     });
 
-    this.props.history.push("/forecast/");
+    this.props.history.push(`/forecast/${this.state.location}`);
   }
 
   render() {

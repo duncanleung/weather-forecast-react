@@ -12,7 +12,6 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled(Link)`
-  padding: 0 10px;
   text-decoration: none;
   color: orangered;`;
 
