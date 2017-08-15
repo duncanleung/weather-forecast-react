@@ -51,7 +51,9 @@ class LocationContainer extends Component {
     });
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
+
     apiMethods.fetchForecast(this.state.location).then(response => {
       this.setState((prevState, props) => {
         return {
@@ -69,13 +71,15 @@ class LocationContainer extends Component {
             {JSON.stringify(this.state.response, null, 2)}
           </code>
         </pre>
-        <Input
-          type="text"
-          value={this.state.location}
-          placeholder="ex: Irvine, CA"
-          onChange={this.handleChange}
-        />
-        <Button onClick={this.handleSubmit}>Get Forecast</Button>
+        <form onSubmit={this.handleSubmit}>
+          <Input
+            type="text"
+            value={this.state.location}
+            placeholder="ex: Irvine, CA"
+            onChange={this.handleChange}
+          />
+          <Button>Get Forecast</Button>
+        </form>
       </Layout>
     );
   }
