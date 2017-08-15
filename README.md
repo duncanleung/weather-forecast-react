@@ -1,4 +1,18 @@
-#Weather App
+# Weather App
+
+You need to get an openweathermap.org API Key after cloning this app.
+
+Create: `/src/config.js`
+
+```
+const config = {
+  apiKey: "YOUR_API_KEY"
+};
+
+export default config;
+```
+
+------
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
