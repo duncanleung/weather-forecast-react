@@ -3,8 +3,6 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import apiMethods from "../../utilities/api";
-
 const Layout = styled.div`
   display: flex;
   flex-direction: ${props => (props.column ? "column" : "row")};
@@ -34,24 +32,11 @@ class LocationContainer extends Component {
     super(props);
 
     this.state = {
-      location: "irvine",
-      response: null
+      location: "irvine"
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    if (this.state.location) {
-      apiMethods.fetchCurrentWeather(this.state.location).then(response => {
-        this.setState((prevState, props) => {
-          return {
-            response: response
-          };
-        });
-      });
-    }
   }
 
   handleChange(e) {
@@ -67,15 +52,10 @@ class LocationContainer extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    apiMethods.fetchCurrentWeather(this.state.location).then(response => {
-      this.setState((prevState, props) => {
-        return {
-          response: response
-        };
-      });
+    this.props.history.push({
+      pathname: "forecast",
+      search: `?city=${this.state.location}`
     });
-
-    this.props.history.push(`/forecast/${this.state.location}`);
   }
 
   render() {
@@ -90,13 +70,6 @@ class LocationContainer extends Component {
           />
           <Button>Get Forecast</Button>
         </form>
-        {this.state.response
-          ? <pre>
-              <code>
-                {JSON.stringify(this.state.response, null, 2)}
-              </code>
-            </pre>
-          : "Loading"}
       </Layout>
     );
   }

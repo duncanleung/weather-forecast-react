@@ -24,7 +24,7 @@ class App extends Component {
           <Header />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/forecast/:city" component={Forecast} />
+            <Route path="/forecast" component={Forecast} />
             <Route component={NotFound} />
           </Switch>
         </Background>
