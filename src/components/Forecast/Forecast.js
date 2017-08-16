@@ -11,15 +11,42 @@ class Forecast extends Component {
 
     this.state = {
       forecast: null,
-      loading: true
+      loading: true,
+      city: null
     };
   }
 
   componentDidMount() {
     const parsedQueryString = new URLSearchParams(this.props.location.search);
-    const location = parsedQueryString.get("city");
+    this.setState(
+      (prevState, props) => {
+        return {
+          city: parsedQueryString.get("city")
+        };
+      },
+      () => this.getLocationForecast(this.state.city)
+    );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps");
+    const parsedQueryString = new URLSearchParams(nextProps.location.search);
+
+    this.setState(
+      (prevState, props) => {
+        return {
+          city: parsedQueryString.get("city")
+        };
+      },
+      () => this.getLocationForecast(this.state.city)
+    );
+  }
+
+  getLocationForecast(location) {
+    console.log("get", location);
 
     apiMethods.fetchForecast(location).then(response => {
+      console.log(response.city.name);
       this.setState((prevState, props) => {
         return {
           forecast: response,
@@ -32,7 +59,7 @@ class Forecast extends Component {
   render() {
     return (
       <div>
-        {this.state.loading
+        {this.state.loading === true
           ? "Loading"
           : <City
               city={this.state.forecast.city.name}

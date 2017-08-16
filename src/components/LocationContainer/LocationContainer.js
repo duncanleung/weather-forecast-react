@@ -40,11 +40,11 @@ class LocationContainer extends Component {
   }
 
   handleChange(e) {
-    e.persist();
+    let inputValue = e.target.value;
 
     this.setState((prevState, props) => {
       return {
-        location: e.target.value
+        location: inputValue
       };
     });
   }
