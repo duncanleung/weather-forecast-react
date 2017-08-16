@@ -9,7 +9,8 @@ class Forecast extends Component {
     super(props);
 
     this.state = {
-      forecast: null
+      forecast: null,
+      loading: true
     };
   }
 
@@ -20,7 +21,8 @@ class Forecast extends Component {
     apiMethods.fetchForecast(location).then(response => {
       this.setState((prevState, props) => {
         return {
-          forecast: response
+          forecast: response,
+          loading: false
         };
       });
     });
@@ -29,17 +31,31 @@ class Forecast extends Component {
   render() {
     return (
       <div>
-        {this.state.forecast
-          ? this.state.forecast.list.map((forecast, index) =>
-              <Weather key={index} weatherData={forecast} />
-            )
-          : "Loading"}
+        {this.state.loading
+          ? "Loading"
+          : <City
+              city={this.state.forecast.city.name}
+              weatherData={this.state.forecast.list}
+            />}
       </div>
     );
   }
 }
 
 export default withRouter(Forecast);
+
+const City = props => {
+  return (
+    <div>
+      <h1>
+        {props.city}
+      </h1>
+      {props.weatherData.map((forecast, index) =>
+        <Weather key={index} weatherData={forecast} />
+      )}
+    </div>
+  );
+};
 
 const Weather = props => {
   return (
