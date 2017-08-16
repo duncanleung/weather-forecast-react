@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import LocationContainer from "../LocationContainer/LocationContainer";
@@ -12,13 +13,17 @@ const HomeWrapper = styled.div`
   height: 380px;
 `;
 
-const Home = () => {
+const Home = props => {
   return (
     <HomeWrapper>
       <H1>Enter a City and State</H1>
-      <LocationContainer column />
+      <LocationContainer submitLocation={props.submitLocation} column />
     </HomeWrapper>
   );
+};
+
+Home.propTypes = {
+  submitLocation: PropTypes.func.isRequired
 };
 
 export default Home;

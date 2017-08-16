@@ -32,7 +32,7 @@ class LocationContainer extends Component {
     super(props);
 
     this.state = {
-      location: "irvine"
+      location: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -52,9 +52,12 @@ class LocationContainer extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.history.push({
-      pathname: "forecast",
-      search: `?city=${this.state.location}`
+    this.props.submitLocation(this.state.location);
+
+    this.setState((prevState, props) => {
+      return {
+        location: ""
+      };
     });
   }
 
@@ -76,6 +79,7 @@ class LocationContainer extends Component {
 }
 
 LocationContainer.propTypes = {
+  submitLocation: PropTypes.func.isRequired,
   column: PropTypes.bool
 };
 

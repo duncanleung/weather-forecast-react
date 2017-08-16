@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 
@@ -35,26 +36,37 @@ class Forecast extends Component {
           ? "Loading"
           : <City
               city={this.state.forecast.city.name}
-              weatherData={this.state.forecast.list}
+              forecastData={this.state.forecast.list}
             />}
       </div>
     );
   }
 }
 
+Forecast.propTypes = {
+  location: PropTypes.object
+};
+
 export default withRouter(Forecast);
+
+const CityName = styled.h1`text-align: center;`;
 
 const City = props => {
   return (
     <div>
-      <h1>
+      <CityName>
         {props.city}
-      </h1>
-      {props.weatherData.map((forecast, index) =>
+      </CityName>
+      {props.forecastData.map((forecast, index) =>
         <Weather key={index} weatherData={forecast} />
       )}
     </div>
   );
+};
+
+City.propTypes = {
+  city: PropTypes.string.isRequired,
+  forecastData: PropTypes.array.isRequired
 };
 
 const Weather = props => {
@@ -69,4 +81,8 @@ const Weather = props => {
       }
     </div>
   );
+};
+
+Weather.propTypes = {
+  weatherData: PropTypes.object.isRequired
 };

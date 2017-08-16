@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import styled from "styled-components";
 
 import Home from "./Home/Home";
 import Forecast from "./Forecast/Forecast";
 import Header from "./Header/Header";
-import NotFound from "./NotFound/NotFound";
+// import NotFound from "./NotFound/NotFound";
 import pattern from "../images/pattern.svg";
 
 const Background = styled.div`
@@ -21,12 +21,30 @@ class App extends Component {
     return (
       <Router>
         <Background>
-          <Header />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/forecast" component={Forecast} />
-            <Route component={NotFound} />
-          </Switch>
+          <Route
+            render={props =>
+              <Header
+                submitLocation={city =>
+                  props.history.push({
+                    pathname: "forecast",
+                    search: `?city=${city}`
+                  })}
+              />}
+          />
+          <Route
+            exact
+            path="/"
+            render={props =>
+              <Home
+                submitLocation={city =>
+                  props.history.push({
+                    pathname: "forecast",
+                    search: `?city=${city}`
+                  })}
+              />}
+          />
+          <Route path="/forecast" component={Forecast} />
+          {/* <Route component={NotFound} /> */}
         </Background>
       </Router>
     );
