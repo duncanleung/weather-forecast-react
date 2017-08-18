@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import Weather from "./Weather";
+import WeatherSummary from "./WeatherSummary";
 
 const CityName = styled.h1`text-align: center;`;
 const WeatherContainer = styled.div`
@@ -17,8 +17,12 @@ const Location = props => {
         {props.city}
       </CityName>
       <WeatherContainer>
-        {props.forecastData.map((forecast, index) =>
-          <Weather key={index} weatherData={forecast} />
+        {props.forecastData.list.map((forecast, index) =>
+          <WeatherSummary
+            key={index}
+            city={props.city}
+            weatherData={forecast}
+          />
         )}
       </WeatherContainer>
     </div>
@@ -27,7 +31,7 @@ const Location = props => {
 
 Location.propTypes = {
   city: PropTypes.string.isRequired,
-  forecastData: PropTypes.array.isRequired
+  forecastData: PropTypes.object.isRequired
 };
 
 export default Location;

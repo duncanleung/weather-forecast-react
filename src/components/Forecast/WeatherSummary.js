@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 import { getDate } from "../../utilities/helpers";
@@ -33,37 +33,41 @@ const Date = styled.div`
   color: #333;
 `;
 
-const Weather = props => {
+const WeatherSummary = props => {
   let date = getDate(props.weatherData.dt);
   let icon = props.weatherData.weather[0].icon;
 
   let parsedQueryString = new URLSearchParams(props.location.search);
   let city = parsedQueryString.get("city");
 
+  const gotoDetails = weatherData => {
+    weatherData.city = props.city;
+
+    props.history.push({
+      pathname: `/details/${city}`,
+      weatherData: weatherData
+    });
+  };
+
   return (
-    <WeatherWrapper>
-      <Link to={`/details/${city}`}>
-        <WeatherIcon
-          src={`/images/weather-icons/${icon}.svg`}
-          alt={props.weatherData.weather[0].main}
-        />
-        <Date>
-          {date}
-        </Date>
-        {
-          <pre>
-            <code>
-              {JSON.stringify(props.weatherData, null, 2)}
-            </code>
-          </pre>
-        }
-      </Link>
+    <WeatherWrapper
+      onClick={() => {
+        gotoDetails(props.weatherData);
+      }}
+    >
+      <WeatherIcon
+        src={`/images/weather-icons/${icon}.svg`}
+        alt={props.weatherData.weather[0].main}
+      />
+      <Date>
+        {date}
+      </Date>
     </WeatherWrapper>
   );
 };
 
-Weather.propTypes = {
+WeatherSummary.propTypes = {
   weatherData: PropTypes.object.isRequired
 };
 
-export default withRouter(Weather);
+export default withRouter(WeatherSummary);

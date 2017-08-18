@@ -60,7 +60,7 @@ class Forecast extends Component {
           ? "Loading"
           : <Location
               city={this.state.forecast.city.name}
-              forecastData={this.state.forecast.list}
+              forecastData={this.state.forecast}
             />}
       </div>
     );
