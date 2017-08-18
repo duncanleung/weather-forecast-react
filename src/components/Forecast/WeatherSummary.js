@@ -23,13 +23,14 @@ const WeatherWrapper = styled.div`
   }
 `;
 const WeatherIcon = styled.img`
-  opacity: .6;
+  opacity: ${props => (props.detail ? "1" : ".6")};
   transition: opacity .2s;
+  height: ${props => (props.detail ? "130px" : "60px")};
 `;
 const Date = styled.div`
   text-align: center;
   font-weight: 100;
-  font-size: 20px;
+  font-size: ${props => (props.detail ? "30px" : "22px")};
   color: #333;
 `;
 
@@ -56,10 +57,11 @@ const WeatherSummary = props => {
       }}
     >
       <WeatherIcon
+        detail={props.detail}
         src={`/images/weather-icons/${icon}.svg`}
         alt={props.weatherData.weather[0].main}
       />
-      <Date>
+      <Date detail={props.detail}>
         {date}
       </Date>
     </WeatherWrapper>

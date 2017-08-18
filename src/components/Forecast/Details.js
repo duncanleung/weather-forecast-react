@@ -5,8 +5,14 @@ import WeatherSummary from "./WeatherSummary";
 
 import { convertTemp } from "../../utilities/helpers";
 
+const DetailsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+`;
 const DetailsList = styled.div`
-  font-size: 34px;
+  font-size: 24px;
   font-weight: 100;
   max-width: 400px;
   margin: 0 auto;
@@ -16,9 +22,9 @@ const DetailsList = styled.div`
 const Details = props => {
   const data = props.history.location.weatherData;
   return (
-    <div>
-      <WeatherSummary weatherData={data} />
-      <div>
+    <DetailsContainer>
+      <WeatherSummary detail weatherData={data} />
+      <DetailsList>
         <p>
           {data.city}
         </p>
@@ -34,8 +40,8 @@ const Details = props => {
         <p>
           humidity: {data.humidity}
         </p>
-      </div>
-    </div>
+      </DetailsList>
+    </DetailsContainer>
   );
 };
 
