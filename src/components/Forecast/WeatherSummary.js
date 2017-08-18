@@ -62,7 +62,10 @@ const WeatherSummary = props => {
 };
 
 WeatherSummary.propTypes = {
-  weatherData: PropTypes.object.isRequired
+  weatherData: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  detail: PropTypes.bool,
+  handleClick: PropTypes.func
 };
 
 export default withRouter(WeatherSummary);

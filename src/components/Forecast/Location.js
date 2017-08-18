@@ -42,7 +42,8 @@ const Location = props => {
 
 Location.propTypes = {
   city: PropTypes.string.isRequired,
-  forecastData: PropTypes.object.isRequired
+  forecastData: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 export default withRouter(Location);
