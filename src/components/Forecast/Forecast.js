@@ -98,19 +98,25 @@ City.propTypes = {
 };
 
 const Weather = props => {
+  let date = getDate(props.weatherData.dt);
+  let icon = props.weatherData.weather[0].icon;
+
   return (
     <div>
-      <img src="" alt="" />
+      <img
+        src={`/images/weather-icons/${icon}.svg`}
+        alt={props.weatherData.weather[0].main}
+      />
       <div>
-        {getDate(props.weatherData.dt)}
+        {date}
       </div>
-      {
+      {/* {
         <pre>
           <code>
             {JSON.stringify(props.weatherData, null, 2)}
           </code>
         </pre>
-      }
+      } */}
     </div>
   );
 };
