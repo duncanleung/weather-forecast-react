@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -83,4 +82,4 @@ LocationContainer.propTypes = {
   column: PropTypes.bool
 };
 
-export default withRouter(LocationContainer);
+export default LocationContainer;
