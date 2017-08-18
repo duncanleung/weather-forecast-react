@@ -30,7 +30,6 @@ class Forecast extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps");
     const parsedQueryString = new URLSearchParams(nextProps.location.search);
 
     this.setState(
@@ -44,10 +43,7 @@ class Forecast extends Component {
   }
 
   getLocationForecast(location) {
-    console.log("get", location);
-
     apiMethods.fetchForecast(location).then(response => {
-      console.log(response.city.name);
       this.setState((prevState, props) => {
         return {
           forecast: response,
