@@ -78,6 +78,10 @@ Forecast.propTypes = {
 export default withRouter(Forecast);
 
 const CityName = styled.h1`text-align: center;`;
+const WeatherContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
 
 const City = props => {
   return (
@@ -85,9 +89,11 @@ const City = props => {
       <CityName>
         {props.city}
       </CityName>
-      {props.forecastData.map((forecast, index) =>
-        <Weather key={index} weatherData={forecast} />
-      )}
+      <WeatherContainer>
+        {props.forecastData.map((forecast, index) =>
+          <Weather key={index} weatherData={forecast} />
+        )}
+      </WeatherContainer>
     </div>
   );
 };
@@ -97,19 +103,47 @@ City.propTypes = {
   forecastData: PropTypes.array.isRequired
 };
 
+const WeatherWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 20px 0;
+  cursor: pointer;
+
+  &:hover {
+    img {
+      opacity: 1;
+    }
+  }
+
+  @media (min-width: 551px) {
+    width: 33%;
+  }
+`;
+const WeatherIcon = styled.img`
+  opacity: .6;
+  transition: opacity .2s;
+`;
+const Date = styled.div`
+  text-align: center;
+  font-weight: 100;
+  font-size: 20px;
+  color: #333;
+`;
+
 const Weather = props => {
   let date = getDate(props.weatherData.dt);
   let icon = props.weatherData.weather[0].icon;
 
   return (
-    <div>
-      <img
+    <WeatherWrapper>
+      <WeatherIcon
         src={`/images/weather-icons/${icon}.svg`}
         alt={props.weatherData.weather[0].main}
       />
-      <div>
+      <Date>
         {date}
-      </div>
+      </Date>
       {/* {
         <pre>
           <code>
@@ -117,7 +151,7 @@ const Weather = props => {
           </code>
         </pre>
       } */}
-    </div>
+    </WeatherWrapper>
   );
 };
 

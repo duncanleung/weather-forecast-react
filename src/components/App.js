@@ -6,10 +6,10 @@ import Home from "./Home/Home";
 import Forecast from "./Forecast/Forecast";
 import Header from "./Header/Header";
 // import NotFound from "./NotFound/NotFound";
-import pattern from "../images/pattern.svg";
+// import pattern from "../images/pattern.svg";
 
 const Background = styled.div`
-  // background: url('${pattern}');
+  // background: url('/images/pattern.svg');
   height: 100vh;
   max-width: 800px;
   margin: 0 auto;

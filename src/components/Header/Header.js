@@ -5,11 +5,17 @@ import { Link } from "react-router-dom";
 
 import LocationContainer from "../LocationContainer/LocationContainer";
 
-const Wrapper = styled.div`
+const HeaderWrapper = styled.div`
   background-color: white;
   font-size: 30px;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 570px) {
+    flex-direction: row;
+  }
 `;
 
 const Title = styled(Link)`
@@ -18,10 +24,10 @@ const Title = styled(Link)`
 
 const Header = props => {
   return (
-    <Wrapper>
+    <HeaderWrapper>
       <Title to="/">Weather Forecast</Title>
       <LocationContainer submitLocation={props.submitLocation} />
-    </Wrapper>
+    </HeaderWrapper>
   );
 };
 
