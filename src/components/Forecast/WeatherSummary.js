@@ -10,7 +10,7 @@ const WeatherWrapper = styled.div`
   flex-direction: column;
   width: 50%;
   margin: 20px 0;
-  cursor: pointer;
+  cursor: ${props => (props.detail ? "default" : "pointer")};
 
   &:hover {
     img {
@@ -41,21 +41,14 @@ const WeatherSummary = props => {
   let parsedQueryString = new URLSearchParams(props.location.search);
   let city = parsedQueryString.get("city");
 
-  const gotoDetails = weatherData => {
-    weatherData.city = props.city;
-
-    props.history.push({
-      pathname: `/details/${city}`,
-      weatherData: weatherData
-    });
+  const handleClick = () => {
+    if (props.handleClick) {
+      props.handleClick(props.weatherData, city);
+    }
   };
 
   return (
-    <WeatherWrapper
-      onClick={() => {
-        gotoDetails(props.weatherData);
-      }}
-    >
+    <WeatherWrapper detail={props.detail} onClick={handleClick}>
       <WeatherIcon
         detail={props.detail}
         src={`/images/weather-icons/${icon}.svg`}

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 import WeatherSummary from "./WeatherSummary";
@@ -11,6 +12,15 @@ const WeatherContainer = styled.div`
 `;
 
 const Location = props => {
+  const gotoDetails = (weatherData, city) => {
+    weatherData.city = props.city;
+
+    props.history.push({
+      pathname: `/details/${city}`,
+      weatherData: weatherData
+    });
+  };
+
   return (
     <div>
       <CityName>
@@ -19,6 +29,7 @@ const Location = props => {
       <WeatherContainer>
         {props.forecastData.list.map((forecast, index) =>
           <WeatherSummary
+            handleClick={gotoDetails}
             key={index}
             city={props.city}
             weatherData={forecast}
@@ -34,4 +45,4 @@ Location.propTypes = {
   forecastData: PropTypes.object.isRequired
 };
 
-export default Location;
+export default withRouter(Location);
