@@ -27,7 +27,7 @@ class App extends Component {
               <Header
                 submitLocation={city =>
                   props.history.push({
-                    pathname: "forecast",
+                    pathname: "/forecast",
                     search: `?city=${city}`
                   })}
               />}
@@ -39,7 +39,7 @@ class App extends Component {
               <Home
                 submitLocation={city =>
                   props.history.push({
-                    pathname: "forecast",
+                    pathname: "/forecast",
                     search: `?city=${city}`
                   })}
               />}
