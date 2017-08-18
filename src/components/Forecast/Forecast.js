@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 
+import { getDate } from "../../utilities/helpers";
 import apiMethods from "../../utilities/api.js";
 
 class Forecast extends Component {
@@ -99,6 +100,10 @@ City.propTypes = {
 const Weather = props => {
   return (
     <div>
+      <img src="" alt="" />
+      <div>
+        {getDate(props.weatherData.dt)}
+      </div>
       {
         <pre>
           <code>
