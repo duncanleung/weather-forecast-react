@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import styled from "styled-components";
 
+import Header from "./Header/Header";
 import Home from "./Home/Home";
 import Forecast from "./Forecast/Forecast";
-import Header from "./Header/Header";
+import Detail from "./Forecast/Detail";
 // import NotFound from "./NotFound/NotFound";
 // import pattern from "../images/pattern.svg";
 
@@ -44,6 +45,7 @@ class App extends Component {
               />}
           />
           <Route path="/forecast" component={Forecast} />
+          <Route path="/detail/:city" component={Detail} />
           {/* <Route component={NotFound} /> */}
         </Background>
       </Router>
