@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import Weather from "./Weather";
 
-const Detail = props => {
-  return <div>Detail</div>;
+const Details = props => {
+  return <div>Details</div>;
 };
 
-export default Detail;
+export default Details;

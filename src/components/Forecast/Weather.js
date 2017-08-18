@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { withRouter, Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { getDate } from "../../utilities/helpers";
@@ -36,22 +37,27 @@ const Weather = props => {
   let date = getDate(props.weatherData.dt);
   let icon = props.weatherData.weather[0].icon;
 
+  let parsedQueryString = new URLSearchParams(props.location.search);
+  let city = parsedQueryString.get("city");
+
   return (
     <WeatherWrapper>
-      <WeatherIcon
-        src={`/images/weather-icons/${icon}.svg`}
-        alt={props.weatherData.weather[0].main}
-      />
-      <Date>
-        {date}
-      </Date>
-      {/* {
-      <pre>
-        <code>
-          {JSON.stringify(props.weatherData, null, 2)}
-        </code>
-      </pre>
-    } */}
+      <Link to={`/details/${city}`}>
+        <WeatherIcon
+          src={`/images/weather-icons/${icon}.svg`}
+          alt={props.weatherData.weather[0].main}
+        />
+        <Date>
+          {date}
+        </Date>
+        {
+          <pre>
+            <code>
+              {JSON.stringify(props.weatherData, null, 2)}
+            </code>
+          </pre>
+        }
+      </Link>
     </WeatherWrapper>
   );
 };
@@ -60,4 +66,4 @@ Weather.propTypes = {
   weatherData: PropTypes.object.isRequired
 };
 
-export default Weather;
+export default withRouter(Weather);
